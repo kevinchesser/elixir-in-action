@@ -1,0 +1,399 @@
+Erlang/OTP 21 [erts-10.2.4] [source] [64-bit] [smp:12:12] [ds:12:12:10] [async-threads:1] [hipe]
+
+Interactive Elixir (1.8.1) - press Ctrl+C to exit (type h() ENTER for help)
+iex(1)> 3
+3
+iex(2)> type(3)
+** (CompileError) iex:2: undefined function type/1
+
+iex(2)> 0xFF
+255
+iex(3)> 3.14
+3.14
+iex(4)> 1.0e-2
+0.01
+iex(5)> 1 + 2 * 3
+7
+iex(6)> 4 / 2
+2.0
+iex(7)> 3 / 2
+1.5
+iex(8)> div(5.2)
+** (CompileError) iex:8: undefined function div/1
+
+iex(8)> div(5,2)
+2
+iex(9)> rem(5,2)
+1
+iex(10)> 1_000_000
+1000000
+iex(11)> 9999999999999999999999999999999999999999999999999999999999999999999999999999999999999
+9999999999999999999999999999999999999999999999999999999999999999999999999999999999999
+iex(12)> :an_atom
+:an_atom
+iex(13)> :another_atom
+:another_atom
+iex(14)> :"an atom with spaces"
+:"an atom with spaces"
+iex(15)> variable = :some_atom
+:some_atom
+iex(16)> variable
+:some_atom
+iex(17)> AnAtom
+AnAtom
+iex(18)> AnAtom == :"Elixir.AnAtom"
+true
+iex(19)> AnAtom == Elixir.AnAtom
+true
+iex(20)> alias IO, as: MyIO
+IO
+iex(21)> MyIO.puts("Hello!")
+Hello!
+:ok
+iex(22)> MyIO == Elixir.IO
+true
+iex(23)> MyIO == IO
+true
+iex(24)> MyID = IO
+** (MatchError) no match of right hand side value: IO
+    (stdlib) erl_eval.erl:453: :erl_eval.expr/5
+    (iex) lib/iex/evaluator.ex:257: IEx.Evaluator.handle_eval/5
+    (iex) lib/iex/evaluator.ex:237: IEx.Evaluator.do_eval/3
+    (iex) lib/iex/evaluator.ex:215: IEx.Evaluator.eval/3
+    (iex) lib/iex/evaluator.ex:103: IEx.Evaluator.loop/1
+    (iex) lib/iex/evaluator.ex:27: IEx.Evaluator.init/4
+iex(24)> :true == true
+true
+iex(25)> :false == false
+true
+iex(26)> false == false
+true
+iex(27)> true == true
+true
+iex(28)> true == false
+false
+iex(29)> true and false
+false
+iex(30)> true and true
+true
+iex(31)> false or true
+true
+iex(32)> not false
+true
+iex(33)> false
+false
+iex(34)> not true
+false
+iex(35)> not :an_atom_other
+** (ArgumentError) argument error
+    :erlang.not(:an_atom_other)
+iex(35)> :nil
+nil
+iex(36)> nul
+** (CompileError) iex:36: undefined function nul/0
+
+iex(36)> nil
+nil
+iex(37)> nil == :nil
+true
+iex(38)> nil || false || 5
+5
+iex(39)> nil || false || 5 || true
+5
+iex(40)> true && 5
+5
+iex(41)> true && false
+false
+iex(42)> fakse && 5
+** (CompileError) iex:42: undefined function fakse/0
+    (elixir) expanding macro: Kernel.&&/2
+    iex:42: (file)
+iex(42)> false && 5
+false
+iex(43)> nil && 5
+nil
+iex(44)> read_cached || read_from_disk || read_from_database
+** (CompileError) iex:44: undefined function read_cached/0
+    (elixir) expanding macro: Kernel.||/2
+    iex:44: (file)
+    (elixir) expanding macro: Kernel.||/2
+    iex:44: (file)
+iex(44)> person = {"Bob", 25}
+{"Bob", 25}
+iex(45)> person
+{"Bob", 25}
+iex(46)> age = elem(person, 1)
+25
+iex(47)> put_elem(person, 1, 26)
+{"Bob", 26}
+iex(48)> person
+{"Bob", 25}
+iex(49)> person = {"Yob", 28}
+{"Yob", 28}
+iex(50)> person
+{"Yob", 28}
+iex(51)> prime_numbers = [1, 2, 3, 5, 7]
+[1, 2, 3, 5, 7]
+iex(52)> length(prime_numbers)
+5
+iex(53)> lists are like singly linked lists so operations are mostly O(n)
+** (SyntaxError) iex:53: syntax error before: '('
+
+iex(53)> Enum.at(prime_numbers, 4)
+7
+iex(54)> 5 in prime_numbers
+true
+iex(55)> 4 in prime_numbers
+false
+iex(56)> List.replace_at(prime_numbers, 0, 11)
+[11, 2, 3, 5, 7]
+iex(57)> List.insert_at(prime_numbers, -1, 1)
+[1, 2, 3, 5, 7, 1]
+iex(58)> List.insert_at(prime_numbers, 4, 1)
+[1, 2, 3, 5, 1, 7]
+iex(59)> [1, 2, 3] ++ [4, 5]
+[1, 2, 3, 4, 5]
+iex(60)> [1 | []]
+[1]
+iex(61)> [1 | 2 | []]
+** (CompileError) iex:61: misplaced operator |/2
+
+The | operator is typically used between brackets as the cons operator:
+
+    [head | tail]
+
+where head is a single element and the tail is the remaining of a list.
+It is also used to update maps and structs, via the %{map | key: value} notation,
+and in typespecs, such as @type and @spec, to express the union of two types
+    (stdlib) lists.erl:1354: :lists.mapfoldl/3
+    (stdlib) lists.erl:1355: :lists.mapfoldl/3
+iex(61)> [1 | [2 | []]]
+[1, 2]
+iex(62)> [1 | []2]
+** (SyntaxError) iex:62: syntax error before: "2"
+
+iex(62)> [1 | [2]]
+[1, 2]
+iex(63)> [1 | [2, 3, 4]
+...(63)> ]
+[1, 2, 3, 4]
+iex(64)> hd([1, 2, 3, 4])
+1
+iex(65)> tl([1, 2, 3, 4)]
+** (SyntaxError) iex:65: unexpected token: ). The "[" at line 65 is missing terminator "]"
+
+iex(65)> tl([1, 2, 3, 4])
+[2, 3, 4]
+iex(66)> a_list = [5, :value, true]
+[5, :value, true]
+iex(67)> new_list = [:new_element | a_list]
+[:new_element, 5, :value, true]
+iex(68)> def complex_transformation(data) do
+...(68)> data
+...(68)> |> transformation_1(1)
+...(68)> |> transformation2()
+...(68)> |> transformation3()
+...(68)> end
+** (ArgumentError) cannot invoke def/2 outside module
+    (elixir) lib/kernel.ex:5362: Kernel.assert_module_scope/3
+    (elixir) lib/kernel.ex:4101: Kernel.define/4
+    (elixir) expanding macro: Kernel.def/2
+    iex:68: (file)
+iex(68)> bob = %{:name = > "Bob", :age => 25, "works_at = "Initech"}
+...(68)>
+...(68)> bob
+...(68)> %
+...(68)> end
+...(68)>
+BREAK: (a)bort (c)ontinue (p)roc info (i)nfo (l)oaded
+       (v)ersion (k)ill (D)b-tables (d)istribution
+a
+╭─kevin@undercity in ~/projects/elixir-in-action/ch1 on master✘✘✘
+╰─± iex
+Erlang/OTP 21 [erts-10.2.4] [source] [64-bit] [smp:12:12] [ds:12:12:10] [async-threads:1] [hipe]
+
+Interactive Elixir (1.8.1) - press Ctrl+C to exit (type h() ENTER for help)
+iex(1)> bob = %{:name => "Bob", :age => 25, :works_at = "Initech"}
+** (SyntaxError) iex:1: syntax error before: '}'
+
+iex(1)> bob = %{:name => "Bob", :age => 25, :works_at => "Initech"}
+%{age: 25, name: "Bob", works_at: "Initech"}
+iex(2)> bob = %{name: "Bob", age: 25m works_at: "Initech"}
+** (SyntaxError) iex:2: syntax error before: m
+
+iex(2)> bob = %{name: "Bob", age: 25, works_at: "Initech"}
+%{age: 25, name: "Bob", works_at: "Initech"}
+iex(3)> bob[:works_at]
+"Initech"
+iex(4)> bob[works_at]
+** (CompileError) iex:4: undefined function works_at/0
+    (stdlib) lists.erl:1354: :lists.mapfoldl/3
+    (stdlib) lists.erl:1355: :lists.mapfoldl/3
+iex(4)> bob[:works_at]
+"Initech"
+iex(5)> bob[:works_att]
+nil
+iex(6)> bob.age
+25
+iex(7)> bob.aaaaa
+** (KeyError) key :aaaaa not found in: %{age: 25, name: "Bob", works_at: "Initech"}
+
+iex(7)> next_years_bob = %{bob | age: 26}
+%{age: 26, name: "Bob", works_at: "Initech"}
+iex(8)> next_years_bob = %{bob | age: 26, works_at: "aaaa corp"}
+%{age: 26, name: "Bob", works_at: "aaaa corp"}
+iex(9)> Map.put(bob, :salary, 50000)
+%{age: 25, name: "Bob", salary: 50000, works_at: "Initech"}
+iex(10)> Dict.put(bob, :salary, 50000)
+warning: Dict.put/3 is deprecated. Use the Map module for working with maps or the Keyword module for
+working with keyword lists
+  iex:10
+
+%{age: 25, name: "Bob", salary: 50000, works_at: "Initech"}
+iex(11)> <<1, 2, 3>>
+<<1, 2, 3>>
+iex(12)> <<256>>
+<<0>>
+iex(13)> <<257>
+...(13)> >
+...(13)>
+...(13)> <<<<
+...(13)> asdasda
+...(13)> >>>>>>>
+...(13)> end
+** (SyntaxError) iex:19: unexpected token: end. The "<<" at line 13 is missing terminator ">>"
+
+iex(13)> <<257>>
+<<1>>
+iex(14)> <<512>>
+<<0>>
+iex(15)> <<257:16>>
+** (SyntaxError) iex:15: unexpected token: ":" (column 6, codepoint U+003A)
+
+iex(15)> <<257::16>>
+<<1, 1>>
+iex(16)> <<1::4, 15::4>>
+<<31>>
+iex(17)> <<1::1, 0::1, 1::1>>
+<<5::size(3)>>
+iex(18)> <<1, 2>> <> <<3, 4>>
+<<1, 2, 3, 4>>
+iex(19)> "This is a string"
+"This is a string"
+iex(20)> "Embedded expression: #{3 + 0.14}"
+"Embedded expression: 3.14"
+iex(21)> "\r \n" \\"
+...(21)>
+...(21)> "
+** (CompileError) iex:21: undefined function \\/2
+
+iex(21)> "
+...(21)> This is
+...(21)> a multiline string
+...(21)> "
+"\nThis is\na multiline string\n"
+iex(22)> ~s(This is also a string)
+"This is also a string"
+iex(23)> ~s("Do... or do not. There is no try." -Master Yoda)
+"\"Do... or do not. There is no try.\" -Master Yoda"
+iex(24)> ~S(Not interpolated #{3 + 0.14})
+"Not interpolated \#{3 + 0.14}"
+iex(25)> ~S(Not escaped \n)
+"Not escaped \\n"
+iex(26)> """
+...(26)> Heredoc must end on its own line """
+** (SyntaxError) iex:27: invalid location for heredoc terminator, please escape token or move it to its own line: """
+
+iex(26)> """
+...(26)> Heredoc must end on its own line
+...(26)> """
+"Heredoc must end on its own line\n"
+iex(27)> "String" <> " " <> "concatenation"
+"String concatenation"
+iex(28)> 'ABC'
+'ABC'
+iex(29)> [65, 66, 67]
+'ABC'
+iex(30)> 'Interpolation: #{3 + 0.14}'
+'Interpolation: 3.14'
+iex(31)> ~c(Character list sigil)
+'Character list sigil'
+iex(32)> ~C(Unescaped sigil #{3 + 0.14})
+'Unescaped sigil \#{3 + 0.14}'
+iex(33)> '''
+...(33)> Heredoc
+...(33)> '''
+'Heredoc\n'
+iex(34)> String.to_char_list("ABC)
+...(34)> a
+...(34)> aaa
+...(34)> end
+...(34)> "
+...(34)> '''
+...(34)> asdjasdkjas '''
+** (SyntaxError) iex:40: invalid location for heredoc terminator, please escape token or move it to its own line: '''
+
+iex(34)> String.to_char_list("ABC")
+warning: String.to_char_list/1 is deprecated. Use String.to_charlist/1 instead
+  iex:34
+
+'ABC'
+iex(35)> String.to_charlist("ABC")
+'ABC'
+iex(36)> List.to_string('ABC')
+"ABC"
+iex(37)> square = fn(x) ->
+...(37)> x * x
+...(37)> end
+#Function<6.128620087/1 in :erl_eval.expr/5>
+iex(38)> square.(5)
+25
+iex(39)> print_element = fn(x) -> IO.puts(x) end
+#Function<6.128620087/1 in :erl_eval.expr/5>
+iex(40)> Enum.each([1, 2, 3], print_element)
+1
+2
+3
+:ok
+iex(41)> Enum.each(
+...(41)> [1, 2, 3],
+...(41)> fn(x) -> IO.puts(x) end
+...(41)> )
+1
+2
+3
+:ok
+iex(42)> Enum.each(
+...(42)> [1,2,3],
+...(42)> &IO.puts/1
+...(42)> )
+1
+2
+3
+:ok
+iex(43)> lambda = fn(x, y, z) -> x * y + z end
+#Function<18.128620087/3 in :erl_eval.expr/5>
+iex(44)> lambda = &(&1 * &2 + &3)
+#Function<18.128620087/3 in :erl_eval.expr/5>
+iex(45)> lambda.(2, 3, 4)
+10
+iex(46)> outside_var = 5
+5
+iex(47)> my_lambda = fn() ->
+...(47)> IO.puts(outside_var)
+...(47)> end
+#Function<20.128620087/0 in :erl_eval.expr/5>
+iex(48)> my_lambda.()
+5
+:ok
+iex(49)> outside_var = 6
+6
+iex(50)> my_lambda.()
+5
+:ok
+iex(51)>
+BREAK: (a)bort (c)ontinue (p)roc info (i)nfo (l)oaded
+       (v)ersion (k)ill (D)b-tables (d)istribution
+^C%
+╭─kevin@undercity in ~/projects/elixir-in-action/ch1 on master✘✘✘
+╰─±
